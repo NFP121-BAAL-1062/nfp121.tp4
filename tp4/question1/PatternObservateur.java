@@ -29,9 +29,16 @@ public class PatternObservateur extends junit.framework.TestCase {
         l1.insert(" 1 ");
         // vérifier que les deux observateurs ont bien été notifiés avec les
         // bons paramètres
+        
+        assertEquals(o1.senders().pop(),o2.senders().pop());
+        assertEquals(o1.senders().pop(),l1);
+        assertEquals(o2.senders().pop(),l1);
+        
+        assertTrue(o1.arguments().pop().equals(o2.arguments().pop()));
+        assertTrue(o1.arguments().peek().equals("test")&&o1.arguments().pop().equals(o2.arguments().pop()));
 
         // à compléter !!
-
+        
         // ne pas modifier ces lignes, dernières assertions vraies de cette
         // méthode
         assertTrue(o1.senders().empty() && o1.arguments().empty());
@@ -54,6 +61,12 @@ public class PatternObservateur extends junit.framework.TestCase {
         // à compléter à partir de la ligne 56
         // vérifier que l'observateur a bien été notifié par les deux listes
 
+        assertEquals(o.senders().pop(),o.senders().pop());
+        assertEquals(o.arguments().peek()," B ");
+        assertEquals("test"+o.arguments().pop().toString().trim(),o.arguments().pop().toString());
+        assertEquals(o.senders().pop(),o.senders().pop());
+        assertEquals(o.arguments().peek()," A ");
+        assertEquals("test"+o.arguments().pop().toString().trim(),o.arguments().pop().toString());
         // à compléter !!
 
         // ne pas modifier cette ligne, dernière assertion vraie de cette
@@ -76,6 +89,17 @@ public class PatternObservateur extends junit.framework.TestCase {
         // vérifier le bon fonctionnement de countObservers(), de deleteObserver
         // et deleteObservers()
 
+        assertTrue(l1.countObservers()==2);
+        assertTrue(l2.countObservers()==2);
+        
+        l1.deleteObserver(o1);
+        l2.deleteObserver(o2);
+        
+        assertTrue(l1.countObservers()==1);
+        assertTrue(l2.countObservers()==1);
+        
+        l1.deleteObserver(o2);
+        l2.deleteObserver(o1);
         // à compléter !!
 
         // ne pas modifier ces lignes, dernières assertions vraies de cette
